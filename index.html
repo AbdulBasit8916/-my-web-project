@@ -1,293 +1,187 @@
-/* ==========================================
-   STOP FOOD IMAGE ZOOM
-========================================== */
+<!-- ================= VENDOR MODAL ================= -->
+<div
+    class="modal fade"
+    id="vendorModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
 
-.food-img {
-    transform: scale(1) !important;
-    transition: none !important;
-}
+        <div class="modal-content vendor-modal">
 
-.food-card:hover .food-img {
-    transform: scale(1) !important;
-}
+            <!-- HEADER -->
+            <div class="modal-header vendor-modal-header">
 
-.food-img-wrap {
-    overflow: hidden;
-}
+                <div>
+                    <span class="modal-eyebrow">
+                        PARTNER WITH US
+                    </span>
 
+                    <h5 class="modal-title">
+                        Add New Vendor
+                    </h5>
 
-/* ==========================================
-   VENDOR MODAL
-========================================== */
+                    <p class="vendor-subtitle">
+                        Tell us about your food business
+                    </p>
+                </div>
 
-.vendor-modal {
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                ></button>
 
-    background: #111111 !important;
+            </div>
 
-    color: #ffffff !important;
 
-    border: 1px solid #ff5722 !important;
+            <!-- BODY -->
+            <div class="modal-body">
 
-    border-radius: 18px !important;
+                <form id="vendorForm">
 
-    overflow: hidden;
+                    <!-- Vendor Name -->
+                    <div class="vendor-field">
 
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.8);
+                        <label>
+                            <i class="bi bi-shop"></i>
+                            Vendor Name
+                        </label>
 
-}
+                        <input
+                            type="text"
+                            id="vendorName"
+                            placeholder="e.g. Karachi Biryani"
+                            required
+                        >
 
+                    </div>
 
-/* HEADER */
 
-.vendor-modal-header {
+                    <!-- Food Type -->
+                    <div class="vendor-field">
 
-    background: #181818 !important;
+                        <label>
+                            <i class="bi bi-grid"></i>
+                            Food Type
+                        </label>
 
-    border-bottom:
-        1px solid #303030 !important;
+                        <select
+                            id="vendorType"
+                            required
+                        >
 
-    padding: 24px !important;
+                            <option value="">
+                                Select food type
+                            </option>
 
-}
+                            <option value="Burgers & Fast Food">
+                                Burgers & Fast Food
+                            </option>
 
+                            <option value="Pizza">
+                                Pizza
+                            </option>
 
-.vendor-modal-header .modal-title {
+                            <option value="Chicken">
+                                Chicken
+                            </option>
 
-    color: #ffffff;
+                            <option value="Desi Food">
+                                Desi Food
+                            </option>
 
-    font-size: 1.5rem;
+                            <option value="Desserts">
+                                Desserts
+                            </option>
 
-    font-weight: 700;
+                            <option value="Drinks">
+                                Drinks
+                            </option>
 
-    margin-top: 5px;
+                        </select>
 
-}
+                    </div>
 
 
-.modal-eyebrow {
+                    <!-- Phone -->
+                    <div class="vendor-field">
 
-    color: #ff5722;
+                        <label>
+                            <i class="bi bi-telephone"></i>
+                            Phone Number
+                        </label>
 
-    font-size: 0.75rem;
+                        <input
+                            type="tel"
+                            id="vendorPhone"
+                            placeholder="03001234567"
+                            required
+                        >
 
-    font-weight: 800;
+                    </div>
 
-    letter-spacing: 1.5px;
 
-}
+                    <!-- Address -->
+                    <div class="vendor-field">
 
+                        <label>
+                            <i class="bi bi-geo-alt"></i>
+                            Address
+                        </label>
 
-.vendor-subtitle {
+                        <input
+                            type="text"
+                            id="vendorAddress"
+                            placeholder="e.g. Main Tariq Road, Karachi"
+                            required
+                        >
 
-    color: #999999;
+                    </div>
 
-    font-size: 0.85rem;
 
-    margin: 5px 0 0;
+                    <!-- Vendor Bio -->
+                    <div class="vendor-field">
 
-}
+                        <label>
+                            <i class="bi bi-person-lines-fill"></i>
+                            Vendor Bio
+                        </label>
 
+                        <textarea
+                            id="vendorBio"
+                            rows="4"
+                            placeholder="Tell customers about your restaurant, special dishes and experience..."
+                            required
+                        ></textarea>
 
-/* BODY */
+                    </div>
 
-.vendor-modal .modal-body {
 
-    background: #111111;
+                    <!-- Error -->
+                    <div
+                        id="vendor-error"
+                        class="vendor-error"
+                    ></div>
 
-    padding: 24px;
 
-}
+                    <!-- Button -->
+                    <button
+                        type="submit"
+                        class="vendor-submit-btn"
+                    >
 
+                        <i class="bi bi-plus-circle"></i>
 
-/* FIELD */
+                        Add Vendor
 
-.vendor-field {
+                    </button>
 
-    margin-bottom: 17px;
+                </form>
 
-}
+            </div>
 
+        </div>
 
-.vendor-field label {
-
-    display: block;
-
-    color: #ffffff;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    margin-bottom: 7px;
-
-}
-
-
-.vendor-field label i {
-
-    color: #ff5722;
-
-    margin-right: 6px;
-
-}
-
-
-/* INPUT / SELECT / TEXTAREA */
-
-.vendor-field input,
-.vendor-field select,
-.vendor-field textarea {
-
-    width: 100%;
-
-    background: #1d1d1d;
-
-    color: #ffffff;
-
-    border: 1px solid #353535;
-
-    border-radius: 9px;
-
-    padding: 12px 14px;
-
-    outline: none;
-
-    font-family: inherit;
-
-    transition: 0.2s ease;
-
-}
-
-
-.vendor-field input::placeholder,
-.vendor-field textarea::placeholder {
-
-    color: #777777;
-
-}
-
-
-.vendor-field input:focus,
-.vendor-field select:focus,
-.vendor-field textarea:focus {
-
-    border-color: #ff5722;
-
-    background: #191919;
-
-    box-shadow:
-        0 0 0 3px rgba(255, 87, 34, 0.12);
-
-}
-
-
-/* SELECT */
-
-.vendor-field select {
-
-    cursor: pointer;
-
-}
-
-
-.vendor-field select option {
-
-    background: #1d1d1d;
-
-    color: #ffffff;
-
-}
-
-
-/* TEXTAREA */
-
-.vendor-field textarea {
-
-    resize: vertical;
-
-    min-height: 100px;
-
-}
-
-
-/* ERROR */
-
-.vendor-error {
-
-    color: #ff7043;
-
-    font-size: 13px;
-
-    min-height: 20px;
-
-    margin-bottom: 8px;
-
-}
-
-
-/* BUTTON */
-
-.vendor-submit-btn {
-
-    width: 100%;
-
-    background: #ff5722;
-
-    color: #ffffff;
-
-    border: none;
-
-    padding: 13px;
-
-    border-radius: 9px;
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    transition: 0.2s ease;
-
-}
-
-
-.vendor-submit-btn:hover {
-
-    background: #e64a19;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 8px 20px rgba(255, 87, 34, 0.25);
-
-}
-
-
-/* MOBILE */
-
-@media (max-width: 576px) {
-
-    .vendor-modal-header,
-    .vendor-modal .modal-body {
-
-        padding: 18px !important;
-
-    }
-
-    .vendor-modal-header .modal-title {
-
-        font-size: 1.25rem;
-
-    }
-
-}
+    </div>
+</div>
