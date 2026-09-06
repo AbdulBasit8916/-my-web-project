@@ -1,453 +1,509 @@
-// ===============================
-// Cart
-// ===============================
+// ==========================================
+// FOOD MEN - COMPLETE WORKING JAVASCRIPT
+// ==========================================
 
 let cart = [];
 
-// Toggle Cart Drawer
+// ==========================================
+// CART DRAWER
+// ==========================================
+
 function toggleCart() {
-  const overlay = document.querySelector('.drawer-overlay');
-  const drawer = document.querySelector('.cart-drawer');
+    const drawer = document.querySelector(".cart-drawer");
+    const overlay = document.querySelector(".drawer-overlay");
 
-  if (overlay && drawer) {
-    overlay.classList.toggle('active');
-    drawer.classList.toggle('active');
-  }
+    if (!drawer || !overlay) return;
+
+    drawer.classList.toggle("active");
+    overlay.classList.toggle("active");
 }
 
-// Add Item to Cart
+// ==========================================
+// ADD TO CART
+// ==========================================
+
 function addToCart(name, price, img) {
-  const existingItem = cart.find(item => item.name === name);
 
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({
-      name,
-      price,
-      img,
-      quantity: 1
-    });
-  }
+    const existing = cart.find(item => item.name === name);
 
-  updateCartUI();
-  toggleCart();
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({
+            name: name,
+            price: Number(price),
+            img: img,
+            quantity: 1
+        });
+    }
+
+    updateCartUI();
+
+    const drawer = document.querySelector(".cart-drawer");
+    const overlay = document.querySelector(".drawer-overlay");
+
+    if (drawer) drawer.classList.add("active");
+    if (overlay) overlay.classList.add("active");
 }
 
-// Remove Item
+// ==========================================
+// REMOVE FROM CART
+// ==========================================
+
 function removeFromCart(index) {
-  cart.splice(index, 1);
-  updateCartUI();
+
+    if (index < 0 || index >= cart.length) return;
+
+    cart.splice(index, 1);
+    updateCartUI();
 }
 
-// Update Cart
+// ==========================================
+// UPDATE CART
+// ==========================================
+
 function updateCartUI() {
-  const cartContainer = document.querySelector('.cart-items');
-  const cartBadge = document.querySelector('.cart-count');
 
-  if (!cartContainer) return;
+    const container = document.querySelector(".cart-items");
+    const count = document.querySelector(".cart-count");
 
-  const totalCount = cart.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+    if (!container) return;
 
-  if (cartBadge) {
-    cartBadge.textContent = totalCount;
-  }
+    const totalItems = cart.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
 
-  cartContainer.innerHTML = '';
+    if (count) {
+        count.textContent = totalItems;
+    }
 
-  if (cart.length === 0) {
-    cartContainer.innerHTML =
-      '<p class="text-center text-muted my-4">Your cart is empty.</p>';
-    return;
-  }
+    if (cart.length === 0) {
 
-  cart.forEach((item, index) => {
-    const itemElement = document.createElement('div');
+        container.innerHTML = `
+            <p class="text-center text-muted my-4">
+                Your cart is empty.
+            </p>
+        `;
 
-    itemElement.className =
-      'd-flex align-items-center justify-content-between mb-3 pb-2 border-bottom';
+        return;
+    }
 
-    itemElement.innerHTML = `
-      <div class="d-flex align-items-center gap-3">
-        <img
-          src="${item.img}"
-          alt="${item.name}"
-          style="width:50px;height:50px;object-fit:cover;border-radius:8px;"
-        >
+    container.innerHTML = "";
 
-        <div>
-          <h6 class="mb-0" style="font-size:0.9rem;">
-            ${item.name}
-          </h6>
+    cart.forEach((item, index) => {
 
-          <small class="text-muted">
-            Rs. ${item.price} x ${item.quantity}
-          </small>
-        </div>
-      </div>
+        const row = document.createElement("div");
 
-      <button
-        type="button"
-        class="btn btn-sm btn-outline-danger"
-        onclick="removeFromCart(${index})"
-      >
-        <i class="bi bi-trash"></i>
-      </button>
-    `;
+        row.className =
+            "cart-item d-flex align-items-center justify-content-between";
 
-    cartContainer.appendChild(itemElement);
-  });
+        row.innerHTML = `
+            <div class="d-flex align-items-center gap-3">
+
+                <img
+                    src="${item.img}"
+                    alt="${item.name}"
+                    class="cart-item-img"
+                >
+
+                <div>
+                    <h6 class="mb-1">
+                        ${item.name}
+                    </h6>
+
+                    <small class="text-muted">
+                        Rs. ${item.price} × ${item.quantity}
+                    </small>
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                onclick="removeFromCart(${index})"
+            >
+                <i class="bi bi-trash"></i>
+            </button>
+        `;
+
+        container.appendChild(row);
+    });
 }
 
+// ==========================================
+// FILTER FOOD
+// ==========================================
 
-// ===============================
-// Page Ready
-// ===============================
+function filterFood(category) {
 
-document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll(".food-card");
 
-  // ===============================
-  // Sidebar Navigation
-  // ===============================
+    category = category.toLowerCase().trim();
 
-  const navLinks = document.querySelectorAll('.nav-link');
+    cards.forEach(card => {
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', function () {
-      navLinks.forEach(item => item.classList.remove('active'));
-      this.classList.add('active');
-    });
-  });
+        const badge = card.querySelector(".badge");
 
+        if (!badge) return;
 
-  // ===============================
-  // Category Buttons
-  // ===============================
-
-  const categoryButtons =
-    document.querySelectorAll('.category-card');
-
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', function () {
-
-      categoryButtons.forEach(btn =>
-        btn.classList.remove('active')
-      );
-
-      this.classList.add('active');
-
-      const category =
-        this.textContent.trim().toLowerCase();
-
-      filterFood(category);
-    });
-  });
-
-
-  // ===============================
-  // Menu Filter Buttons
-  // ===============================
-
-  const filterButtons =
-    document.querySelectorAll('.filter-btn');
-
-  filterButtons.forEach(button => {
-    button.addEventListener('click', function () {
-
-      filterButtons.forEach(btn =>
-        btn.classList.remove('active')
-      );
-
-      this.classList.add('active');
-
-      const category =
-        this.textContent.trim().toLowerCase();
-
-      filterFood(category);
-    });
-  });
-
-
-  // ===============================
-  // Food Filtering
-  // ===============================
-
-  function filterFood(category) {
-    const foodCards =
-      document.querySelectorAll('.food-card');
-
-    foodCards.forEach(card => {
-
-      const badge = card.querySelector('.badge');
-
-      if (!badge) return;
-
-      const foodCategory =
-        badge.textContent.trim().toLowerCase();
-
-      if (
-        category === 'all' ||
-        foodCategory === category
-      ) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-
-
-  // ===============================
-  // Search
-  // ===============================
-
-  const searchInput =
-    document.querySelector('.top-search input');
-
-  if (searchInput) {
-    searchInput.addEventListener('input', function () {
-
-      const search =
-        this.value.trim().toLowerCase();
-
-      const foodCards =
-        document.querySelectorAll('.food-card');
-
-      foodCards.forEach(card => {
-
-        const name =
-          card.querySelector('h5')?.textContent
-            .trim()
-            .toLowerCase() || '';
-
-        const category =
-          card.querySelector('.badge')?.textContent
-            .trim()
-            .toLowerCase() || '';
+        const cardCategory =
+            badge.textContent.toLowerCase().trim();
 
         if (
-          name.includes(search) ||
-          category.includes(search)
+            category === "all" ||
+            cardCategory === category
         ) {
-          card.style.display = '';
+            card.style.display = "";
         } else {
-          card.style.display = 'none';
+            card.style.display = "none";
         }
-      });
     });
-  }
+}
 
+// ==========================================
+// PAGE READY
+// ==========================================
 
-  // ===============================
-  // Add Vendor
-  // ===============================
+document.addEventListener("DOMContentLoaded", function () {
 
-  const vendorButton =
-    document.querySelector('.vendor-btn');
+    // ======================================
+    // NAVIGATION BUTTONS / LINKS
+    // ======================================
 
-  if (vendorButton) {
+    const navLinks =
+        document.querySelectorAll(".nav-link");
 
-    vendorButton.addEventListener('click', () => {
+    navLinks.forEach(link => {
 
-      const vendorName =
-        prompt('Enter vendor name:');
+        link.addEventListener("click", function () {
 
-      if (!vendorName || !vendorName.trim()) {
-        return;
-      }
+            navLinks.forEach(item =>
+                item.classList.remove("active")
+            );
 
-      const vendorsSection =
-        document.querySelector('#vendors');
-
-      if (!vendorsSection) return;
-
-      const vendorCard =
-        document.createElement('div');
-
-      vendorCard.className =
-        'vendor-card mt-3';
-
-      const safeName =
-        vendorName.trim();
-
-      vendorCard.innerHTML = `
-        <div class="d-flex align-items-center gap-3">
-          <div
-            class="avatar"
-            style="width:55px;height:55px;"
-          >
-            ${safeName.charAt(0).toUpperCase()}
-          </div>
-
-          <div>
-            <h5 class="mb-1">${safeName}</h5>
-            <span class="text-muted">
-              Local Food Vendor
-            </span>
-          </div>
-        </div>
-      `;
-
-      vendorsSection.appendChild(vendorCard);
+            this.classList.add("active");
+        });
     });
-  }
 
 
-  // ===============================
-  // Checkout
-  // ===============================
+    // ======================================
+    // CATEGORY BUTTONS
+    // ======================================
 
-  const checkoutButton =
-    document.querySelector('.cart-drawer .primary-btn');
+    const categoryButtons =
+        document.querySelectorAll(".category-card");
 
-  if (checkoutButton) {
+    categoryButtons.forEach(button => {
 
-    checkoutButton.addEventListener('click', () => {
+        button.addEventListener("click", function () {
 
-      if (cart.length === 0) {
-        alert('Your cart is empty.');
-        return;
-      }
+            categoryButtons.forEach(btn =>
+                btn.classList.remove("active")
+            );
 
-      const total =
-        cart.reduce(
-          (sum, item) =>
-            sum + (Number(item.price) * item.quantity),
-          0
-        );
+            this.classList.add("active");
 
-      alert(
-        `Order placed successfully!\nTotal: Rs. ${total}`
-      );
-
-      cart = [];
-      updateCartUI();
-
-      const overlay =
-        document.querySelector('.drawer-overlay');
-
-      const drawer =
-        document.querySelector('.cart-drawer');
-
-      if (overlay) overlay.classList.remove('active');
-      if (drawer) drawer.classList.remove('active');
+            filterFood(this.textContent);
+        });
     });
-  }
 
 
-  // ===============================
-  // Login Validation
-  // ===============================
+    // ======================================
+    // FILTER BUTTONS
+    // ======================================
 
-  const loginForm =
-    document.getElementById('loginForm');
+    const filterButtons =
+        document.querySelectorAll(".filter-btn");
 
-  const errorElement =
-    document.getElementById('login-error');
+    filterButtons.forEach(button => {
 
-  if (loginForm) {
+        button.addEventListener("click", function () {
 
-    loginForm.addEventListener('submit', function (e) {
+            filterButtons.forEach(btn =>
+                btn.classList.remove("active")
+            );
 
-      e.preventDefault();
+            this.classList.add("active");
 
-      const email =
-        document.getElementById('email')?.value.trim() || '';
-
-      const password =
-        document.getElementById('password')?.value || '';
-
-      const phoneInput =
-        document.getElementById('phone');
-
-      const phone =
-        phoneInput
-          ? phoneInput.value.replace(/\D/g, '')
-          : '';
-
-      clearError();
-
-
-      // Email must contain @
-      if (!email.includes('@')) {
-        showError(
-          'Login failed: Email must contain "@".'
-        );
-        return;
-      }
-
-
-      // Email must contain .
-      if (!email.includes('.')) {
-        showError(
-          'Login failed: Email must contain ".".'
-        );
-        return;
-      }
-
-
-      // Password minimum 8 characters
-      if (password.length < 8) {
-        showError(
-          'Login failed: Password must be at least 8 characters.'
-        );
-        return;
-      }
-
-
-      // Phone minimum 8 digits
-      if (phoneInput && phone.length < 8) {
-        showError(
-          'Login failed: Phone number must contain at least 8 digits.'
-        );
-        return;
-      }
-
-
-      // Login success
-      alert('Login Successful!');
-
-      const modalElement =
-        document.getElementById('loginModal');
-
-      if (modalElement && window.bootstrap) {
-
-        const modalInstance =
-          bootstrap.Modal.getInstance(modalElement) ||
-          new bootstrap.Modal(modalElement);
-
-        modalInstance.hide();
-      }
-
-      loginForm.reset();
+            filterFood(this.textContent);
+        });
     });
-  }
 
 
-  function showError(message) {
+    // ======================================
+    // SEARCH
+    // ======================================
 
-    if (errorElement) {
-      errorElement.textContent = message;
-      errorElement.style.display = 'block';
-    } else {
-      alert(message);
+    const searchInput =
+        document.querySelector(".top-search input");
+
+    if (searchInput) {
+
+        searchInput.addEventListener("input", function () {
+
+            const search =
+                this.value.toLowerCase().trim();
+
+            const cards =
+                document.querySelectorAll(".food-card");
+
+            cards.forEach(card => {
+
+                const name =
+                    card.querySelector("h5")
+                    ?.textContent
+                    .toLowerCase() || "";
+
+                const category =
+                    card.querySelector(".badge")
+                    ?.textContent
+                    .toLowerCase() || "";
+
+                if (
+                    name.includes(search) ||
+                    category.includes(search)
+                ) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
     }
-  }
 
 
-  function clearError() {
+    // ======================================
+    // ADD VENDOR
+    // ======================================
 
-    if (errorElement) {
-      errorElement.textContent = '';
-      errorElement.style.display = 'none';
+    const vendorButton =
+        document.querySelector(".vendor-btn");
+
+    if (vendorButton) {
+
+        vendorButton.addEventListener("click", function () {
+
+            const name =
+                prompt("Enter Vendor Name:");
+
+            if (!name || !name.trim()) return;
+
+            const vendors =
+                document.querySelector("#vendors");
+
+            if (!vendors) return;
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "vendor-card mt-3";
+
+            card.innerHTML = `
+                <div class="d-flex align-items-center gap-3">
+
+                    <div
+                        class="avatar"
+                        style="width:55px;height:55px;"
+                    >
+                        ${name.trim().charAt(0).toUpperCase()}
+                    </div>
+
+                    <div>
+                        <h5 class="mb-1">
+                            ${name.trim()}
+                        </h5>
+
+                        <span class="text-muted">
+                            Local Food Vendor
+                        </span>
+                    </div>
+
+                </div>
+            `;
+
+            vendors.appendChild(card);
+        });
     }
-  }
 
 
-  // Initial Cart UI
-  updateCartUI();
+    // ======================================
+    // CHECKOUT
+    // ======================================
+
+    const checkoutButton =
+        document.querySelector(".cart-drawer .primary-btn");
+
+    if (checkoutButton) {
+
+        checkoutButton.addEventListener(
+            "click",
+            function () {
+
+                if (cart.length === 0) {
+
+                    alert("Your cart is empty.");
+
+                    return;
+                }
+
+                const total =
+                    cart.reduce(
+                        (sum, item) =>
+                            sum +
+                            item.price * item.quantity,
+                        0
+                    );
+
+                alert(
+                    "Order placed successfully!\n\n" +
+                    "Total: Rs. " + total
+                );
+
+                cart = [];
+
+                updateCartUI();
+
+                const drawer =
+                    document.querySelector(".cart-drawer");
+
+                const overlay =
+                    document.querySelector(".drawer-overlay");
+
+                if (drawer)
+                    drawer.classList.remove("active");
+
+                if (overlay)
+                    overlay.classList.remove("active");
+            }
+        );
+    }
+
+
+    // ======================================
+    // LOGIN
+    // ======================================
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const error =
+        document.getElementById("login-error");
+
+    if (loginForm) {
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                const email =
+                    document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+                const password =
+                    document
+                    .getElementById("password")
+                    .value;
+
+
+                // Clear error
+                if (error) {
+                    error.style.display = "none";
+                    error.textContent = "";
+                }
+
+
+                // ==================================
+                // EMAIL VALIDATION
+                // ==================================
+
+                if (!email.includes("@")) {
+
+                    showLoginError(
+                        'Login failed: Email must contain "@".'
+                    );
+
+                    return;
+                }
+
+
+                if (!email.includes(".")) {
+
+                    showLoginError(
+                        'Login failed: Email must contain ".".'
+                    );
+
+                    return;
+                }
+
+
+                // ==================================
+                // PASSWORD VALIDATION
+                // ==================================
+
+                if (password.length < 8) {
+
+                    showLoginError(
+                        "Login failed: Password must be at least 8 characters."
+                    );
+
+                    return;
+                }
+
+
+                // ==================================
+                // SUCCESS
+                // ==================================
+
+                alert("Login Successful!");
+
+                loginForm.reset();
+
+                const modal =
+                    document.getElementById("loginModal");
+
+                if (modal && window.bootstrap) {
+
+                    const instance =
+                        bootstrap.Modal.getInstance(modal);
+
+                    if (instance) {
+                        instance.hide();
+                    }
+                }
+            }
+        );
+    }
+
+
+    // ======================================
+    // LOGIN ERROR
+    // ======================================
+
+    function showLoginError(message) {
+
+        if (error) {
+
+            error.textContent = message;
+            error.style.display = "block";
+
+        } else {
+
+            alert(message);
+        }
+    }
+
+
+    // ======================================
+    // INITIAL CART
+    // ======================================
+
+    updateCartUI();
 
 });
