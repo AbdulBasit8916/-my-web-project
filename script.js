@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // ==========================================
-    // CART VARIABLES
+    // CART
     // ==========================================
 
     let cart = [];
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // CART OPEN
+    // OPEN CART
     // ==========================================
 
     cartButton.addEventListener("click", function () {
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // CART CLOSE
+    // CLOSE CART
     // ==========================================
 
     closeCart.addEventListener("click", function () {
@@ -87,8 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             updateCart();
 
-
-            // Open cart
             cartDrawer.classList.add("open");
             drawerOverlay.classList.add("show");
 
@@ -109,19 +107,18 @@ document.addEventListener("DOMContentLoaded", function () {
         let quantity = 0;
 
 
-        // Empty Cart
         if (cart.length === 0) {
 
             cartItems.innerHTML = `
                 <div style="
                     text-align:center;
                     padding:30px 10px;
-                    color:#a0a0a0;
+                    color:#999;
                 ">
 
                     <i class="bi bi-cart-x"
                        style="
-                       font-size:40px;
+                       font-size:42px;
                        color:#ff5722;
                        ">
                     </i>
@@ -136,7 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // Cart has items
         cart.forEach(function (item, index) {
 
             total += item.price * item.quantity;
@@ -197,11 +193,12 @@ document.addEventListener("DOMContentLoaded", function () {
                                     width:28px;
                                     height:28px;
                                     border:1px solid #444;
-                                    background:#242424;
+                                    background:#222;
                                     color:white;
                                     border-radius:6px;
                                     cursor:pointer;
-                                ">
+                                "
+                            >
                                 -
                             </button>
 
@@ -219,11 +216,12 @@ document.addEventListener("DOMContentLoaded", function () {
                                     width:28px;
                                     height:28px;
                                     border:1px solid #444;
-                                    background:#242424;
+                                    background:#222;
                                     color:white;
                                     border-radius:6px;
                                     cursor:pointer;
-                                ">
+                                "
+                            >
                                 +
                             </button>
 
@@ -244,7 +242,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             cursor:pointer;
                         "
                     >
+
                         <i class="bi bi-trash"></i>
+
                     </button>
 
                 </div>
@@ -256,15 +256,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        // Update total
         cartTotal.textContent = `Rs. ${total}`;
-
-        // Update count
         cartCount.textContent = quantity;
 
 
         // ==========================================
-        // INCREASE QUANTITY
+        // INCREASE
         // ==========================================
 
         document.querySelectorAll(".increase-btn").forEach(function (button) {
@@ -283,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ==========================================
-        // DECREASE QUANTITY
+        // DECREASE
         // ==========================================
 
         document.querySelectorAll(".decrease-btn").forEach(function (button) {
@@ -312,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ==========================================
-        // REMOVE ITEM
+        // REMOVE
         // ==========================================
 
         document.querySelectorAll(".remove-btn").forEach(function (button) {
@@ -337,9 +334,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
 
     const categoryButtons =
-        document.querySelectorAll(
-            ".category-card, .filter-btn"
-        );
+        document.querySelectorAll(".category-card");
+
+    const filterButtons =
+        document.querySelectorAll(".filter-btn");
 
     const foodCards =
         document.querySelectorAll(".food-card");
@@ -348,42 +346,37 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("noFood");
 
 
-    categoryButtons.forEach(function (button) {
+    function setActiveCategory(category) {
 
-        button.addEventListener("click", function () {
+        // Category buttons
+        categoryButtons.forEach(function (button) {
 
-            const category =
-                button.getAttribute("data-category");
+            button.classList.remove("active");
 
-
-            // Active button
-            categoryButtons.forEach(function (btn) {
-
-                btn.classList.remove("active");
-
-            });
-
-
-            document
-                .querySelectorAll(
-                    `[data-category="${category}"]`
-                )
-                .forEach(function (btn) {
-
-                    btn.classList.add("active");
-
-                });
-
-
-            filterFood(category);
+            if (
+                button.getAttribute("data-category") === category
+            ) {
+                button.classList.add("active");
+            }
 
         });
 
-    });
+
+        // Menu filter buttons
+        filterButtons.forEach(function (button) {
+
+            button.classList.remove("active");
+
+            if (
+                button.getAttribute("data-category") === category
+            ) {
+                button.classList.add("active");
+            }
+
+        });
 
 
-    function filterFood(category) {
-
+        // Show food
         let found = false;
 
 
@@ -421,11 +414,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+
+        // ==========================================
+        // IMPORTANT:
+        // REMOVE IMAGE ZOOM AFTER FILTERING
+        // ==========================================
+
+        document.querySelectorAll(".food-img").forEach(function (img) {
+
+            img.style.transform = "scale(1)";
+
+        });
+
     }
 
 
     // ==========================================
-    // SEARCH FOOD
+    // CATEGORY CLICK
+    // ==========================================
+
+    categoryButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const category =
+                button.getAttribute("data-category");
+
+            setActiveCategory(category);
+
+        });
+
+    });
+
+
+    // ==========================================
+    // MENU FILTER CLICK
+    // ==========================================
+
+    filterButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const category =
+                button.getAttribute("data-category");
+
+            setActiveCategory(category);
+
+        });
+
+    });
+
+
+    // ==========================================
+    // SEARCH
     // ==========================================
 
     const searchInput =
@@ -482,6 +523,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
+
+        // Stop zoom
+        document.querySelectorAll(".food-img").forEach(function (img) {
+
+            img.style.transform = "scale(1)";
+
+        });
+
     });
 
 
@@ -515,7 +564,6 @@ document.addEventListener("DOMContentLoaded", function () {
         loginError.style.color = "";
 
 
-        // Email validation
         if (!email.includes("@")) {
 
             loginError.textContent =
@@ -526,7 +574,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // Password validation
         if (password.length < 8) {
 
             loginError.textContent =
@@ -537,8 +584,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // Success
-        loginError.style.color = "#2e7d32";
+        loginError.style.color = "#4caf50";
 
         loginError.textContent =
             "Login successful!";
@@ -556,9 +602,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (modal) {
-
                 modal.hide();
-
             }
 
 
@@ -607,11 +651,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 .trim();
 
 
+        const vendorAddress =
+            document.getElementById("vendorAddress")
+                .value
+                .trim();
+
+
+        const vendorBio =
+            document.getElementById("vendorBio")
+                .value
+                .trim();
+
+
         vendorError.textContent = "";
-        vendorError.style.color = "";
 
 
-        // Vendor name
+        // Vendor Name
         if (vendorName.length < 3) {
 
             vendorError.textContent =
@@ -622,7 +677,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        // Food type
+        // Food Type
         if (vendorType === "") {
 
             vendorError.textContent =
@@ -644,8 +699,30 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        // Address
+        if (vendorAddress.length < 5) {
+
+            vendorError.textContent =
+                "Please enter a valid address.";
+
+            return;
+
+        }
+
+
+        // Bio
+        if (vendorBio.length < 10) {
+
+            vendorError.textContent =
+                "Vendor bio must be at least 10 characters.";
+
+            return;
+
+        }
+
+
         // ==========================================
-        // CREATE NEW VENDOR CARD
+        // CREATE VENDOR
         // ==========================================
 
         const newVendor =
@@ -679,20 +756,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 <p>
+                    <i class="bi bi-geo-alt"></i>
+                    ${vendorAddress}
+                </p>
+
+
+                <p>
+                    ${vendorBio}
+                </p>
+
+
+                <p>
+                    <i class="bi bi-telephone"></i>
                     ${vendorPhone}
                 </p>
 
 
                 <button
                     type="button"
-                    class="outline-btn vendor-view-btn">
-
+                    class="outline-btn vendor-view-btn"
+                >
                     View Menu
-
                 </button>
 
             </div>
-
         `;
 
 
@@ -700,7 +787,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ==========================================
-        // CLOSE VENDOR MODAL
+        // CLOSE MODAL
         // ==========================================
 
         const vendorModalElement =
@@ -714,28 +801,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (vendorModal) {
-
             vendorModal.hide();
-
         }
 
 
-        // Reset form
         vendorForm.reset();
 
-
-        // Attach View Menu
         attachVendorButtons();
-
-
-        // Success message
-        setTimeout(function () {
-
-            alert(
-                `${vendorName} has been added successfully!`
-            );
-
-        }, 300);
 
     });
 
@@ -746,70 +818,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function attachVendorButtons() {
 
-        const buttons =
-            document.querySelectorAll(
-                ".vendor-view-btn"
-            );
+        document
+            .querySelectorAll(".vendor-view-btn")
+            .forEach(function (button) {
+
+                button.onclick = function () {
+
+                    const card =
+                        button.closest(".vendor-card");
 
 
-        buttons.forEach(function (button) {
-
-            button.onclick = function () {
-
-                const card =
-                    button.closest(".vendor-card");
+                    const name =
+                        card.querySelector("h4")
+                            .textContent
+                            .trim();
 
 
-                const name =
-                    card.querySelector("h4")
-                        .textContent
-                        .trim();
+                    const type =
+                        card.querySelector(".vendor-tag")
+                            .textContent
+                            .trim();
 
 
-                const type =
-                    card.querySelector(".vendor-tag")
-                        .textContent
-                        .trim();
-
-
-                document.getElementById(
-                    "vendorInfoTitle"
-                ).textContent = name;
-
-
-                document.getElementById(
-                    "vendorInfoName"
-                ).textContent = name;
-
-
-                document.getElementById(
-                    "vendorInfoType"
-                ).textContent =
-                    `${type} vendor — Menu coming soon!`;
-
-
-                const infoModalElement =
                     document.getElementById(
-                        "vendorInfoModal"
-                    );
+                        "vendorInfoTitle"
+                    ).textContent = name;
 
 
-                const infoModal =
-                    new bootstrap.Modal(
-                        infoModalElement
-                    );
+                    document.getElementById(
+                        "vendorInfoName"
+                    ).textContent = name;
 
 
-                infoModal.show();
+                    document.getElementById(
+                        "vendorInfoType"
+                    ).textContent =
+                        `${type} vendor — Menu coming soon!`;
 
-            };
 
-        });
+                    const infoModal =
+                        new bootstrap.Modal(
+                            document.getElementById(
+                                "vendorInfoModal"
+                            )
+                        );
+
+
+                    infoModal.show();
+
+                };
+
+            });
 
     }
 
 
-    // Run once for existing vendors
     attachVendorButtons();
 
 
@@ -839,17 +902,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         alert(
-            `Order placed successfully!\n\nTotal: Rs. ${total}`
+            "Order placed successfully!\n\n" +
+            "Total: Rs. " + total
         );
 
 
-        // Empty cart
         cart = [];
 
         updateCart();
 
 
-        // Close cart
         cartDrawer.classList.remove("open");
         drawerOverlay.classList.remove("show");
 
@@ -857,7 +919,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // SIDEBAR NAVIGATION
+    // NAVIGATION
     // ==========================================
 
     const navLinks =
@@ -883,7 +945,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // INITIAL CART
+    // INITIALIZE
     // ==========================================
 
     updateCart();
