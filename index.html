@@ -1,791 +1,1276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Men</title>
 
-    <title>Food Men - Food Delivery</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    >
+<style>
+:root{
+    --primary:#ff5722;
+    --primary-hover:#e64a19;
+    --bg:#121212;
+    --card:#1e1e1e;
+    --border:#2a2a2a;
+    --white:#fff;
+    --muted:#a0a0a0;
+}
 
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    >
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-    <link rel="stylesheet" href="style.css">
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:Segoe UI,Tahoma,sans-serif;
+}
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:260px;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    background:var(--card);
+    border-right:1px solid var(--border);
+    padding:25px;
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+}
+
+.brand{
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:35px;
+}
+
+.brand i{
+    color:var(--primary);
+    margin-right:8px;
+}
+
+.side-nav{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.nav-link{
+    color:var(--muted);
+    text-decoration:none;
+    padding:13px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    transition:.2s;
+}
+
+.nav-link:hover,
+.nav-link.active{
+    background:var(--primary);
+    color:white;
+}
+
+.sidebar-bottom{
+    margin-top:auto;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.vendor-btn,
+.login-side-btn{
+    width:100%;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+}
+
+.vendor-btn:hover,
+.login-side-btn:hover{
+    border-color:var(--primary);
+    background:#292929;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:25px 35px;
+}
+
+/* TOP */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+    gap:20px;
+}
+
+.search{
+    position:relative;
+    width:320px;
+}
+
+.search i{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+}
+
+.search input{
+    width:100%;
+    background:var(--card);
+    color:white;
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:11px 15px 11px 40px;
+    outline:none;
+}
+
+.search input:focus{
+    border-color:var(--primary);
+}
+
+.actions{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.cart-btn,
+.profile-btn{
+    background:var(--card);
+    color:white;
+    border:1px solid var(--border);
+    cursor:pointer;
+}
+
+.cart-btn{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    position:relative;
+}
+
+.cart-btn:hover,
+.profile-btn:hover{
+    border-color:var(--primary);
+}
+
+.cart-count{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    background:var(--primary);
+    width:21px;
+    height:21px;
+    border-radius:50%;
+    font-size:11px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.profile-btn{
+    border-radius:25px;
+    padding:6px 12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.avatar{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--primary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:45px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+    margin-bottom:50px;
+}
+
+.hero-text{
+    max-width:520px;
+}
+
+.badge-orange{
+    display:inline-block;
+    color:var(--primary);
+    background:rgba(255,87,34,.15);
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.hero h1{
+    font-size:48px;
+    margin:18px 0;
+    font-weight:800;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.hero-buttons{
+    margin-top:22px;
+    display:flex;
+    gap:10px;
+}
+
+.primary,
+.secondary{
+    border-radius:8px;
+    padding:11px 20px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.primary{
+    background:var(--primary);
+    color:white;
+    border:0;
+}
+
+.primary:hover{
+    background:var(--primary-hover);
+    color:white;
+}
+
+.secondary{
+    background:transparent;
+    color:white;
+    border:1px solid var(--border);
+}
+
+.secondary:hover{
+    border-color:var(--primary);
+    color:white;
+}
+
+.hero-image{
+    width:480px;
+    height:280px;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* SECTIONS */
+
+.section{
+    margin-bottom:55px;
+    scroll-margin-top:25px;
+}
+
+.section-title{
+    margin-bottom:20px;
+}
+
+.eyebrow{
+    color:var(--primary);
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.section-title h2{
+    margin-top:5px;
+    font-weight:700;
+}
+
+/* CATEGORIES */
+
+.categories,
+.filters{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:8px;
+}
+
+.category,
+.filter{
+    white-space:nowrap;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:white;
+    padding:10px 17px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.category:hover,
+.filter:hover,
+.category.active,
+.filter.active{
+    background:var(--primary);
+    border-color:var(--primary);
+}
+
+/* FOOD */
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.food-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:15px;
+    transition:.25s;
+}
+
+.food-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--primary);
+}
+
+.food-image{
+    width:100%;
+    height:170px;
+    border-radius:9px;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+
+.food-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.3s;
+}
+
+.food-card:hover img{
+    transform:scale(1.05);
+}
+
+.food-card h5{
+    margin-bottom:7px;
+}
+
+.food-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:15px;
+}
+
+.price{
+    font-weight:bold;
+}
+
+/* VENDORS */
+
+.vendor-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
+.vendor-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.vendor-icon{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:rgba(255,87,34,.15);
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.vendor-card p{
+    color:var(--muted);
+    margin:0;
+}
+
+/* ORDER / PROFILE */
+
+.info-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:25px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.info-card i{
+    color:var(--primary);
+    font-size:35px;
+}
+
+.info-card p{
+    color:var(--muted);
+    margin:0;
+}
+
+/* CART */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    z-index:2000;
+    display:none;
+}
+
+.overlay.show{
+    display:block;
+}
+
+.cart{
+    position:fixed;
+    right:-420px;
+    top:0;
+    width:390px;
+    height:100vh;
+    background:var(--card);
+    z-index:2100;
+    padding:20px;
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+    box-shadow:-5px 0 25px #000;
+}
+
+.cart.show{
+    right:0;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:15px;
+    border-bottom:1px solid var(--border);
+}
+
+.close{
+    background:none;
+    border:0;
+    color:white;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.cart-list{
+    flex:1;
+    overflow-y:auto;
+    padding:15px 0;
+}
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.cart-item img{
+    width:55px;
+    height:55px;
+    border-radius:8px;
+    object-fit:cover;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info h6{
+    margin:0 0 5px;
+}
+
+.cart-item-info small{
+    color:var(--muted);
+}
+
+.delete{
+    border:1px solid #dc3545;
+    background:transparent;
+    color:#dc3545;
+    border-radius:6px;
+    padding:5px 8px;
+    cursor:pointer;
+}
+
+.total{
+    border-top:1px solid var(--border);
+    padding-top:15px;
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+/* MODAL */
+
+.modal-content{
+    background:var(--card);
+    color:white;
+    border:1px solid var(--border);
+}
+
+.form-control{
+    background:var(--bg);
+    color:white;
+    border:1px solid var(--border);
+}
+
+.form-control:focus{
+    background:var(--bg);
+    color:white;
+    border-color:var(--primary);
+    box-shadow:none;
+}
+
+.form-control::placeholder{
+    color:#777;
+}
+
+.login-error{
+    display:none;
+    color:#ff5722;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+/* FOOTER */
+
+footer{
+    border-top:1px solid var(--border);
+    padding:25px 0;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+}
+
+/* MOBILE */
+
+@media(max-width:992px){
+
+    .sidebar{
+        width:220px;
+    }
+
+    .main{
+        margin-left:220px;
+        width:calc(100% - 220px);
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-image{
+        width:100%;
+    }
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        position:static;
+        width:100%;
+        min-height:auto;
+    }
+
+    .app{
+        flex-direction:column;
+    }
+
+    .side-nav{
+        flex-direction:row;
+        overflow-x:auto;
+    }
+
+    .sidebar-bottom{
+        margin-top:20px;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:15px;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .search{
+        width:100%;
+    }
+
+    .actions{
+        justify-content:flex-end;
+    }
+
+    .hero{
+        padding:25px;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+    .hero-image{
+        height:220px;
+    }
+
+    .cart{
+        width:100%;
+        right:-100%;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<div class="app-shell">
+<div class="app">
 
-    <!-- ================= SIDEBAR ================= -->
+<!-- SIDEBAR -->
+<aside class="sidebar">
 
-    <aside class="sidebar">
+    <div class="brand">
+        <i class="bi bi-fire"></i>
+        Food Men
+    </div>
 
-        <div class="brand">
-            <i class="bi bi-fire brand-mark"></i>
-            <span>Food Men</span>
+    <nav class="side-nav">
+
+        <a class="nav-link active" href="#home">
+            <i class="bi bi-house"></i>
+            Home
+        </a>
+
+        <a class="nav-link" href="#menu">
+            <i class="bi bi-grid"></i>
+            Menu
+        </a>
+
+        <a class="nav-link" href="#vendors">
+            <i class="bi bi-shop"></i>
+            Vendors
+        </a>
+
+        <a class="nav-link" href="#orders">
+            <i class="bi bi-bag"></i>
+            Orders
+        </a>
+
+        <a class="nav-link" href="#profile">
+            <i class="bi bi-person"></i>
+            Profile
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <button class="vendor-btn" id="addVendor">
+            <i class="bi bi-plus-circle"></i>
+            Add Vendor
+        </button>
+
+        <button
+            class="login-side-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#loginModal"
+        >
+            <i class="bi bi-box-arrow-in-right"></i>
+            Login
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+        <div class="search">
+            <i class="bi bi-search"></i>
+
+            <input
+                id="search"
+                type="text"
+                placeholder="Search food..."
+            >
         </div>
 
-        <nav class="side-nav">
-
-            <a href="#home" class="nav-link active">
-                <i class="bi bi-house-door"></i>
-                <span>Home</span>
-            </a>
-
-            <a href="#menu" class="nav-link">
-                <i class="bi bi-grid"></i>
-                <span>Menu</span>
-            </a>
-
-            <a href="#vendors" class="nav-link">
-                <i class="bi bi-shop"></i>
-                <span>Vendors</span>
-            </a>
-
-            <a href="#orders" class="nav-link">
-                <i class="bi bi-bag"></i>
-                <span>Orders</span>
-            </a>
-
-            <a href="#profile" class="nav-link">
-                <i class="bi bi-person"></i>
-                <span>Profile</span>
-            </a>
-
-        </nav>
-
-        <div class="sidebar-bottom">
+        <div class="actions">
 
             <button
-                type="button"
-                class="vendor-btn"
-                id="addVendorBtn"
+                class="cart-btn"
+                id="openCart"
             >
-                <i class="bi bi-plus-circle"></i>
-                Add Vendor
+                <i class="bi bi-cart3"></i>
+                <span class="cart-count">0</span>
             </button>
 
             <button
-                type="button"
-                class="login-side-btn"
+                class="profile-btn"
                 data-bs-toggle="modal"
                 data-bs-target="#loginModal"
             >
-                <i class="bi bi-box-arrow-in-right"></i>
-                Login
+                <span class="avatar">U</span>
+                Account
             </button>
 
         </div>
 
-    </aside>
+    </header>
 
 
-    <!-- ================= MAIN CONTENT ================= -->
+    <!-- HERO -->
+    <section class="hero" id="home">
 
-    <main class="main-content">
+        <div class="hero-text">
 
-        <!-- TOPBAR -->
+            <span class="badge-orange">
+                <i class="bi bi-stars"></i>
+                Deliciousness delivered
+            </span>
 
-        <header class="topbar">
+            <h1>
+                Good food.<br>
+                <span>Good mood.</span>
+            </h1>
 
-            <div class="top-search">
+            <p>
+                Discover your favorite meals, restaurants and
+                local food vendors in one place.
+            </p>
 
-                <i class="bi bi-search"></i>
+            <div class="hero-buttons">
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search for food, restaurants..."
+                <a
+                    href="#menu"
+                    class="primary"
                 >
+                    Explore Menu
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+                <a
+                    href="#vendors"
+                    class="secondary"
+                >
+                    View Vendors
+                </a>
 
             </div>
 
-            <div class="top-actions">
+        </div>
 
-                <button
-                    type="button"
-                    class="icon-btn"
-                    id="cartBtn"
-                    aria-label="Open cart"
-                >
-                    <i class="bi bi-cart3"></i>
-                    <span class="cart-count">0</span>
-                </button>
+        <div class="hero-image">
 
-                <button
-                    type="button"
-                    class="profile-mini"
-                    data-bs-toggle="modal"
-                    data-bs-target="#loginModal"
-                >
-
-                    <div class="avatar">
-                        <span>U</span>
-                    </div>
-
-                    <span>Account</span>
-
-                </button>
-
-            </div>
-
-        </header>
-
-
-        <!-- ================= HERO ================= -->
-
-        <section class="hero-section" id="home">
-
-            <div class="hero-content">
-
-                <span class="hero-badge">
-                    <i class="bi bi-stars"></i>
-                    Deliciousness delivered
-                </span>
-
-                <h1>
-                    Good food.<br>
-                    <span>Good mood.</span>
-                </h1>
-
-                <p>
-                    Discover your favorite meals, restaurants and
-                    local food vendors in one place.
-                </p>
-
-                <div class="hero-actions">
-
-                    <a
-                        href="#menu"
-                        class="primary-btn"
-                    >
-                        Explore Menu
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-
-                    <a
-                        href="#vendors"
-                        class="secondary-btn"
-                    >
-                        View Vendors
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="hero-food">
-
-                <div class="hero-circle"></div>
-
-                <div class="hero-img-box">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
-                        class="hero-img"
-                        alt="Delicious Food"
-                    >
-
-                </div>
-
-                <div class="floating-card card-one">
-                    <i
-                        class="bi bi-star-fill"
-                        style="color:#ffc107;"
-                    ></i>
-                    4.9 Rating
-                </div>
-
-                <div class="floating-card card-two">
-                    <i
-                        class="bi bi-lightning-charge-fill"
-                        style="color:#ff5722;"
-                    ></i>
-                    Fast Delivery
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= CATEGORIES ================= -->
-
-        <section class="section-block">
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="eyebrow">
-                        EXPLORE
-                    </span>
-
-                    <h2>
-                        Food Categories
-                    </h2>
-                </div>
-
-            </div>
-
-            <div class="category-grid">
-
-                <button
-                    type="button"
-                    class="category-card active"
-                    data-category="All"
-                >
-                    <i class="bi bi-grid-fill"></i>
-                    All
-                </button>
-
-                <button
-                    type="button"
-                    class="category-card"
-                    data-category="Burgers"
-                >
-                    <i class="bi bi-badge-hd"></i>
-                    Burgers
-                </button>
-
-                <button
-                    type="button"
-                    class="category-card"
-                    data-category="Pizza"
-                >
-                    <i class="bi bi-pie-chart-fill"></i>
-                    Pizza
-                </button>
-
-                <button
-                    type="button"
-                    class="category-card"
-                    data-category="Chicken"
-                >
-                    <i class="bi bi-egg-fried"></i>
-                    Chicken
-                </button>
-
-                <button
-                    type="button"
-                    class="category-card"
-                    data-category="Desserts"
-                >
-                    <i class="bi bi-cake2-fill"></i>
-                    Desserts
-                </button>
-
-                <button
-                    type="button"
-                    class="category-card"
-                    data-category="Drinks"
-                >
-                    <i class="bi bi-cup-straw"></i>
-                    Drinks
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= MENU ================= -->
-
-        <section
-            class="section-block"
-            id="menu"
-        >
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="eyebrow">
-                        OUR MENU
-                    </span>
-
-                    <h2>
-                        Popular Food
-                    </h2>
-                </div>
-
-                <div class="filter-buttons">
-
-                    <button
-                        type="button"
-                        class="filter-btn active"
-                        data-category="All"
-                    >
-                        All
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-btn"
-                        data-category="Burgers"
-                    >
-                        Burgers
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-btn"
-                        data-category="Pizza"
-                    >
-                        Pizza
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-btn"
-                        data-category="Chicken"
-                    >
-                        Chicken
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-btn"
-                        data-category="Desserts"
-                    >
-                        Desserts
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="food-grid" id="foodGrid">
-
-                <!-- CHICKEN -->
-
-                <div
-                    class="food-card"
-                    data-category="Chicken"
-                    data-name="Crispy Fried Chicken"
-                >
-
-                    <div class="food-img-wrap">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80"
-                            class="food-img"
-                            alt="Crispy Fried Chicken"
-                        >
-
-                    </div>
-
-                    <h5>
-                        Crispy Fried Chicken
-                    </h5>
-
-                    <span class="badge bg-secondary">
-                        Chicken
-                    </span>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            Rs. 850
-                        </strong>
-
-                        <button
-                            type="button"
-                            class="primary-btn add-btn"
-                            data-name="Crispy Fried Chicken"
-                            data-price="850"
-                            data-img="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80"
-                        >
-                            <i class="bi bi-plus"></i>
-                            Add
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- DESSERT -->
-
-                <div
-                    class="food-card"
-                    data-category="Desserts"
-                    data-name="Chocolate Lava Cake"
-                >
-
-                    <div class="food-img-wrap">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
-                            class="food-img"
-                            alt="Chocolate Lava Cake"
-                        >
-
-                    </div>
-
-                    <h5>
-                        Chocolate Lava Cake
-                    </h5>
-
-                    <span class="badge bg-secondary">
-                        Desserts
-                    </span>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            Rs. 450
-                        </strong>
-
-                        <button
-                            type="button"
-                            class="primary-btn add-btn"
-                            data-name="Chocolate Lava Cake"
-                            data-price="450"
-                            data-img="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
-                        >
-                            <i class="bi bi-plus"></i>
-                            Add
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- BURGER -->
-
-                <div
-                    class="food-card"
-                    data-category="Burgers"
-                    data-name="Beef Smash Burger"
-                >
-
-                    <div class="food-img-wrap">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
-                            class="food-img"
-                            alt="Beef Smash Burger"
-                        >
-
-                    </div>
-
-                    <h5>
-                        Beef Smash Burger
-                    </h5>
-
-                    <span class="badge bg-secondary">
-                        Burgers
-                    </span>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            Rs. 650
-                        </strong>
-
-                        <button
-                            type="button"
-                            class="primary-btn add-btn"
-                            data-name="Beef Smash Burger"
-                            data-price="650"
-                            data-img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
-                        >
-                            <i class="bi bi-plus"></i>
-                            Add
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- PIZZA -->
-
-                <div
-                    class="food-card"
-                    data-category="Pizza"
-                    data-name="Cheese Pizza"
-                >
-
-                    <div class="food-img-wrap">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80"
-                            class="food-img"
-                            alt="Cheese Pizza"
-                        >
-
-                    </div>
-
-                    <h5>
-                        Cheese Pizza
-                    </h5>
-
-                    <span class="badge bg-secondary">
-                        Pizza
-                    </span>
-
-                    <div class="food-bottom">
-
-                        <strong>
-                            Rs. 900
-                        </strong>
-
-                        <button
-                            type="button"
-                            class="primary-btn add-btn"
-                            data-name="Cheese Pizza"
-                            data-price="900"
-                            data-img="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80"
-                        >
-                            <i class="bi bi-plus"></i>
-                            Add
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= VENDORS ================= -->
-
-        <section
-            class="section-block"
-            id="vendors"
-        >
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="eyebrow">
-                        DISCOVER
-                    </span>
-
-                    <h2>
-                        Our Vendors
-                    </h2>
-                </div>
-
-            </div>
-
-            <div
-                class="vendor-grid"
-                id="vendorGrid"
+            <img
+                src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80"
+                alt="Food"
             >
 
-                <div class="vendor-card">
+        </div>
 
-                    <div class="vendor-avatar">
-                        <i class="bi bi-shop"></i>
-                    </div>
+    </section>
 
-                    <div>
-                        <h5>
-                            Food Men Kitchen
-                        </h5>
 
-                        <p>
-                            Fresh & delicious meals
-                        </p>
-                    </div>
+    <!-- CATEGORIES -->
+    <section class="section">
+
+        <div class="section-title">
+            <span class="eyebrow">EXPLORE</span>
+            <h2>Food Categories</h2>
+        </div>
+
+        <div class="categories">
+
+            <button class="category active" data-category="All">
+                <i class="bi bi-grid-fill"></i>
+                All
+            </button>
+
+            <button class="category" data-category="Burgers">
+                <i class="bi bi-badge-hd"></i>
+                Burgers
+            </button>
+
+            <button class="category" data-category="Pizza">
+                <i class="bi bi-pie-chart-fill"></i>
+                Pizza
+            </button>
+
+            <button class="category" data-category="Chicken">
+                <i class="bi bi-egg-fried"></i>
+                Chicken
+            </button>
+
+            <button class="category" data-category="Desserts">
+                <i class="bi bi-cake2-fill"></i>
+                Desserts
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MENU -->
+    <section class="section" id="menu">
+
+        <div class="section-title">
+            <span class="eyebrow">OUR MENU</span>
+            <h2>Popular Food</h2>
+        </div>
+
+        <div class="filters">
+
+            <button class="filter active" data-category="All">
+                All
+            </button>
+
+            <button class="filter" data-category="Burgers">
+                Burgers
+            </button>
+
+            <button class="filter" data-category="Pizza">
+                Pizza
+            </button>
+
+            <button class="filter" data-category="Chicken">
+                Chicken
+            </button>
+
+            <button class="filter" data-category="Desserts">
+                Desserts
+            </button>
+
+        </div>
+
+
+        <div class="food-grid" id="foodGrid">
+
+            <!-- CHICKEN -->
+
+            <div
+                class="food-card"
+                data-category="Chicken"
+                data-name="Crispy Fried Chicken"
+            >
+
+                <div class="food-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80"
+                        alt="Crispy Fried Chicken"
+                    >
 
                 </div>
 
-            </div>
+                <h5>Crispy Fried Chicken</h5>
 
-        </section>
+                <span class="badge bg-secondary">
+                    Chicken
+                </span>
 
+                <div class="food-bottom">
 
-        <!-- ================= ORDERS ================= -->
-
-        <section
-            class="section-block"
-            id="orders"
-        >
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="eyebrow">
-                        ORDERS
+                    <span class="price">
+                        Rs. 850
                     </span>
-
-                    <h2>
-                        Your Orders
-                    </h2>
-                </div>
-
-            </div>
-
-            <div class="order-card">
-
-                <i class="bi bi-bag-check"></i>
-
-                <div>
-                    <h5>
-                        No orders yet
-                    </h5>
-
-                    <p>
-                        Add something delicious to your cart.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= PROFILE ================= -->
-
-        <section
-            class="section-block"
-            id="profile"
-        >
-
-            <div class="section-heading">
-
-                <div>
-                    <span class="eyebrow">
-                        ACCOUNT
-                    </span>
-
-                    <h2>
-                        Your Profile
-                    </h2>
-                </div>
-
-            </div>
-
-            <div class="profile-card">
-
-                <div class="avatar large-avatar">
-                    U
-                </div>
-
-                <div>
-
-                    <h5>
-                        Guest User
-                    </h5>
-
-                    <p>
-                        Login to manage your account.
-                    </p>
 
                     <button
-                        type="button"
-                        class="primary-btn"
-                        data-bs-toggle="modal"
-                        data-bs-target="#loginModal"
+                        class="primary add"
+                        data-name="Crispy Fried Chicken"
+                        data-price="850"
+                        data-img="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80"
                     >
-                        Login
+                        <i class="bi bi-plus"></i>
+                        Add
                     </button>
 
                 </div>
 
             </div>
 
-        </section>
 
+            <!-- BURGER -->
 
-        <!-- ================= FOOTER ================= -->
+            <div
+                class="food-card"
+                data-category="Burgers"
+                data-name="Beef Smash Burger"
+            >
 
-        <footer>
+                <div class="food-image">
 
-            <div class="footer-brand">
+                    <img
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
+                        alt="Beef Smash Burger"
+                    >
 
-                <i
-                    class="bi bi-fire"
-                    style="color:var(--primary);"
-                ></i>
+                </div>
 
-                <span>
-                    Food Men © 2026
+                <h5>Beef Smash Burger</h5>
+
+                <span class="badge bg-secondary">
+                    Burgers
                 </span>
 
+                <div class="food-bottom">
+
+                    <span class="price">
+                        Rs. 650
+                    </span>
+
+                    <button
+                        class="primary add"
+                        data-name="Beef Smash Burger"
+                        data-price="650"
+                        data-img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80"
+                    >
+                        <i class="bi bi-plus"></i>
+                        Add
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PIZZA -->
+
+            <div
+                class="food-card"
+                data-category="Pizza"
+                data-name="Cheese Pizza"
+            >
+
+                <div class="food-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80"
+                        alt="Cheese Pizza"
+                    >
+
+                </div>
+
+                <h5>Cheese Pizza</h5>
+
+                <span class="badge bg-secondary">
+                    Pizza
+                </span>
+
+                <div class="food-bottom">
+
+                    <span class="price">
+                        Rs. 900
+                    </span>
+
+                    <button
+                        class="primary add"
+                        data-name="Cheese Pizza"
+                        data-price="900"
+                        data-img="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80"
+                    >
+                        <i class="bi bi-plus"></i>
+                        Add
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESSERT -->
+
+            <div
+                class="food-card"
+                data-category="Desserts"
+                data-name="Chocolate Lava Cake"
+            >
+
+                <div class="food-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
+                        alt="Chocolate Lava Cake"
+                    >
+
+                </div>
+
+                <h5>Chocolate Lava Cake</h5>
+
+                <span class="badge bg-secondary">
+                    Desserts
+                </span>
+
+                <div class="food-bottom">
+
+                    <span class="price">
+                        Rs. 450
+                    </span>
+
+                    <button
+                        class="primary add"
+                        data-name="Chocolate Lava Cake"
+                        data-price="450"
+                        data-img="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
+                    >
+                        <i class="bi bi-plus"></i>
+                        Add
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- VENDORS -->
+    <section class="section" id="vendors">
+
+        <div class="section-title">
+            <span class="eyebrow">DISCOVER</span>
+            <h2>Our Vendors</h2>
+        </div>
+
+        <div class="vendor-grid" id="vendorGrid">
+
+            <div class="vendor-card">
+
+                <div class="vendor-icon">
+                    <i class="bi bi-shop"></i>
+                </div>
+
+                <div>
+                    <h5>Food Men Kitchen</h5>
+                    <p>Fresh & delicious meals</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ORDERS -->
+    <section class="section" id="orders">
+
+        <div class="section-title">
+            <span class="eyebrow">ORDERS</span>
+            <h2>Your Orders</h2>
+        </div>
+
+        <div class="info-card">
+
+            <i class="bi bi-bag-check"></i>
+
+            <div>
+                <h5>No orders yet</h5>
+                <p>Add food to your cart and checkout.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+    <section class="section" id="profile">
+
+        <div class="section-title">
+            <span class="eyebrow">ACCOUNT</span>
+            <h2>Your Profile</h2>
+        </div>
+
+        <div class="info-card">
+
+            <div class="avatar" style="width:65px;height:65px;">
+                U
             </div>
 
             <div>
-                All rights reserved.
+                <h5>Guest User</h5>
+                <p>Login to manage your account.</p>
+
+                <button
+                    class="primary mt-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#loginModal"
+                >
+                    Login
+                </button>
             </div>
 
-        </footer>
+        </div>
 
-    </main>
+    </section>
 
+
+    <footer>
+
+        <span>
+            <i class="bi bi-fire" style="color:#ff5722;"></i>
+            Food Men © 2026
+        </span>
+
+        <span>
+            All rights reserved.
+        </span>
+
+    </footer>
+
+</main>
 </div>
 
 
-<!-- ================= CART OVERLAY ================= -->
+<!-- CART OVERLAY -->
 
 <div
-    class="drawer-overlay"
-    id="drawerOverlay"
+    class="overlay"
+    id="overlay"
 ></div>
 
 
-<!-- ================= CART DRAWER ================= -->
+<!-- CART -->
 
 <div
-    class="cart-drawer"
-    id="cartDrawer"
+    class="cart"
+    id="cart"
 >
 
-    <div class="drawer-header">
+    <div class="cart-header">
 
-        <h5>
-            Your Cart
-        </h5>
+        <h5>Your Cart</h5>
 
         <button
-            type="button"
-            class="close-btn"
-            id="closeCartBtn"
+            class="close"
+            id="closeCart"
         >
             &times;
         </button>
 
     </div>
 
-
     <div
-        class="cart-items"
-        id="cartItems"
+        class="cart-list"
+        id="cartList"
     ></div>
 
+    <div>
 
-    <div class="cart-footer">
+        <div class="total">
 
-        <div class="cart-total">
+            <span>Total</span>
 
-            <span>
-                Total
-            </span>
-
-            <strong id="cartTotal">
+            <strong
+                id="total"
+                style="color:#ff5722;"
+            >
                 Rs. 0
             </strong>
 
         </div>
 
         <button
-            type="button"
-            class="primary-btn checkout-btn"
-            id="checkoutBtn"
+            class="primary"
+            id="checkout"
+            style="width:100%;"
         >
             <i class="bi bi-bag-check"></i>
             Checkout
@@ -796,18 +1281,17 @@
 </div>
 
 
-<!-- ================= LOGIN MODAL ================= -->
+<!-- LOGIN MODAL -->
 
 <div
     class="modal fade"
     id="loginModal"
     tabindex="-1"
-    aria-hidden="true"
 >
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content custom-modal p-3">
+        <div class="modal-content">
 
             <div class="modal-header border-0">
 
@@ -819,11 +1303,9 @@
                     type="button"
                     class="btn-close btn-close-white"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
                 ></button>
 
             </div>
-
 
             <div class="modal-body">
 
@@ -831,31 +1313,23 @@
 
                     <div class="mb-3">
 
-                        <label
-                            class="form-label"
-                            for="email"
-                        >
-                            Gmail / Email
+                        <label class="form-label">
+                            Email
                         </label>
 
                         <input
-                            type="email"
+                            type="text"
                             id="email"
                             class="form-control"
                             placeholder="name@gmail.com"
-                            autocomplete="email"
                             required
                         >
 
                     </div>
 
-
                     <div class="mb-3">
 
-                        <label
-                            class="form-label"
-                            for="password"
-                        >
+                        <label class="form-label">
                             Password
                         </label>
 
@@ -864,22 +1338,20 @@
                             id="password"
                             class="form-control"
                             placeholder="Minimum 8 characters"
-                            autocomplete="current-password"
                             required
                         >
 
                     </div>
 
-
                     <div
-                        id="login-error"
+                        id="loginError"
                         class="login-error"
                     ></div>
 
-
                     <button
                         type="submit"
-                        class="primary-btn w-100"
+                        class="primary"
+                        style="width:100%;"
                     >
                         <i class="bi bi-box-arrow-in-right"></i>
                         Login
@@ -896,15 +1368,498 @@
 </div>
 
 
-<!-- BOOTSTRAP -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-></script>
+<script>
 
-<!-- YOUR JAVASCRIPT -->
+/* =========================================
+   CART
+========================================= */
 
-<script src="script.js"></script>
+let cart = [];
+
+const cartElement = document.getElementById("cart");
+const overlay = document.getElementById("overlay");
+const cartList = document.getElementById("cartList");
+const cartCount = document.querySelector(".cart-count");
+const totalElement = document.getElementById("total");
+
+function openCart(){
+
+    cartElement.classList.add("show");
+    overlay.classList.add("show");
+
+}
+
+function closeCart(){
+
+    cartElement.classList.remove("show");
+    overlay.classList.remove("show");
+
+}
+
+document.getElementById("openCart").onclick = openCart;
+
+document.getElementById("closeCart").onclick = closeCart;
+
+overlay.onclick = closeCart;
+
+
+/* =========================================
+   ADD FOOD
+========================================= */
+
+document.querySelectorAll(".add").forEach(button => {
+
+    button.addEventListener("click", function(){
+
+        const name = this.dataset.name;
+        const price = Number(this.dataset.price);
+        const img = this.dataset.img;
+
+        const existing = cart.find(item => item.name === name);
+
+        if(existing){
+
+            existing.quantity++;
+
+        }else{
+
+            cart.push({
+                name:name,
+                price:price,
+                img:img,
+                quantity:1
+            });
+
+        }
+
+        updateCart();
+        openCart();
+
+    });
+
+});
+
+
+/* =========================================
+   UPDATE CART
+========================================= */
+
+function updateCart(){
+
+    cartList.innerHTML = "";
+
+    let count = 0;
+    let total = 0;
+
+    cart.forEach((item,index) => {
+
+        count += item.quantity;
+        total += item.price * item.quantity;
+
+        const div = document.createElement("div");
+
+        div.className = "cart-item";
+
+        div.innerHTML = `
+
+            <img
+                src="${item.img}"
+                alt="${item.name}"
+            >
+
+            <div class="cart-item-info">
+
+                <h6>${item.name}</h6>
+
+                <small>
+                    Rs. ${item.price} × ${item.quantity}
+                </small>
+
+            </div>
+
+            <button
+                class="delete"
+                onclick="removeItem(${index})"
+            >
+                <i class="bi bi-trash"></i>
+            </button>
+
+        `;
+
+        cartList.appendChild(div);
+
+    });
+
+    cartCount.textContent = count;
+
+    totalElement.textContent =
+        "Rs. " + total;
+
+    if(cart.length === 0){
+
+        cartList.innerHTML = `
+            <p class="text-center text-muted mt-4">
+                Your cart is empty.
+            </p>
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   REMOVE ITEM
+========================================= */
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    updateCart();
+
+}
+
+
+/* =========================================
+   CHECKOUT
+========================================= */
+
+document.getElementById("checkout").onclick = function(){
+
+    if(cart.length === 0){
+
+        alert("Your cart is empty.");
+
+        return;
+    }
+
+    const total = cart.reduce(
+        (sum,item) =>
+        sum + item.price * item.quantity,
+        0
+    );
+
+    alert(
+        "Order placed successfully!\n\n" +
+        "Total: Rs. " + total
+    );
+
+    cart = [];
+
+    updateCart();
+
+    closeCart();
+
+};
+
+
+/* =========================================
+   CATEGORY + FILTER
+========================================= */
+
+function filterFood(category){
+
+    document.querySelectorAll(".food-card")
+    .forEach(card => {
+
+        if(
+            category === "All" ||
+            card.dataset.category === category
+        ){
+
+            card.style.display = "";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* CATEGORY BUTTONS */
+
+document.querySelectorAll(".category")
+.forEach(button => {
+
+    button.onclick = function(){
+
+        document.querySelectorAll(".category")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        this.classList.add("active");
+
+        const category =
+            this.dataset.category;
+
+        filterFood(category);
+
+        document.querySelectorAll(".filter")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+            if(btn.dataset.category === category){
+
+                btn.classList.add("active");
+
+            }
+
+        });
+
+    };
+
+});
+
+
+/* FILTER BUTTONS */
+
+document.querySelectorAll(".filter")
+.forEach(button => {
+
+    button.onclick = function(){
+
+        document.querySelectorAll(".filter")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        this.classList.add("active");
+
+        const category =
+            this.dataset.category;
+
+        filterFood(category);
+
+        document.querySelectorAll(".category")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+            if(btn.dataset.category === category){
+
+                btn.classList.add("active");
+
+            }
+
+        });
+
+    };
+
+});
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+document.getElementById("search")
+.addEventListener("input",function(){
+
+    const value =
+        this.value.toLowerCase().trim();
+
+    document.querySelectorAll(".food-card")
+    .forEach(card => {
+
+        const name =
+            card.dataset.name.toLowerCase();
+
+        const category =
+            card.dataset.category.toLowerCase();
+
+        if(
+            name.includes(value) ||
+            category.includes(value)
+        ){
+
+            card.style.display = "";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+});
+
+
+/* =========================================
+   NAVIGATION ACTIVE
+========================================= */
+
+document.querySelectorAll(".nav-link")
+.forEach(link => {
+
+    link.addEventListener("click",function(){
+
+        document.querySelectorAll(".nav-link")
+        .forEach(item =>
+            item.classList.remove("active")
+        );
+
+        this.classList.add("active");
+
+    });
+
+});
+
+
+/* =========================================
+   ADD VENDOR
+========================================= */
+
+document.getElementById("addVendor")
+.onclick = function(){
+
+    const name =
+        prompt("Enter vendor name:");
+
+    if(!name || !name.trim()){
+
+        return;
+
+    }
+
+    const vendorGrid =
+        document.getElementById("vendorGrid");
+
+    const card =
+        document.createElement("div");
+
+    card.className = "vendor-card";
+
+    const firstLetter =
+        name.trim().charAt(0).toUpperCase();
+
+    card.innerHTML = `
+
+        <div class="vendor-icon">
+            ${firstLetter}
+        </div>
+
+        <div>
+            <h5>${name.trim()}</h5>
+            <p>Local Food Vendor</p>
+        </div>
+
+    `;
+
+    vendorGrid.appendChild(card);
+
+    alert(
+        name.trim() +
+        " added successfully!"
+    );
+
+};
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+document.getElementById("loginForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email")
+        .value
+        .trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    const error =
+        document.getElementById("loginError");
+
+
+    error.style.display = "none";
+    error.textContent = "";
+
+
+    /* @ CHECK */
+
+    if(!email.includes("@")){
+
+        error.textContent =
+            'Login failed: Email must contain "@".';
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    /* DOT CHECK */
+
+    if(!email.includes(".")){
+
+        error.textContent =
+            'Login failed: Email must contain ".".';
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    /* PASSWORD CHECK */
+
+    if(password.length < 8){
+
+        error.textContent =
+            "Login failed: Password must be at least 8 characters.";
+
+        error.style.display = "block";
+
+        return;
+
+    }
+
+
+    /* SUCCESS */
+
+    alert("Login Successful!");
+
+    this.reset();
+
+    const modal =
+        bootstrap.Modal.getInstance(
+            document.getElementById("loginModal")
+        );
+
+    if(modal){
+
+        modal.hide();
+
+    }
+
+});
+
+
+/* =========================================
+   INITIAL CART
+========================================= */
+
+updateCart();
+
+</script>
 
 </body>
 </html>
