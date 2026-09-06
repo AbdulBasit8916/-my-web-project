@@ -1,139 +1,80 @@
 /* ==========================================
-   STOP FOOD IMAGE ZOOM
-========================================== */
-
-.food-img {
-    transform: scale(1) !important;
-    transition: none !important;
-}
-
-.food-card:hover .food-img {
-    transform: scale(1) !important;
-}
-
-.food-img-wrap {
-    overflow: hidden;
-}
-
-
-/* ==========================================
    VENDOR MODAL
 ========================================== */
 
 .vendor-modal {
-
-    background: #111111 !important;
-
+    background: #121212 !important;
     color: #ffffff !important;
-
     border: 1px solid #ff5722 !important;
-
     border-radius: 18px !important;
-
     overflow: hidden;
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.8);
-
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
 }
 
 
-/* HEADER */
+/* Header */
 
 .vendor-modal-header {
-
-    background: #181818 !important;
-
-    border-bottom:
-        1px solid #303030 !important;
-
-    padding: 24px !important;
-
+    background: #1a1a1a !important;
+    border-bottom: 1px solid #2d2d2d !important;
+    padding: 1.5rem 1.7rem !important;
 }
 
 
 .vendor-modal-header .modal-title {
-
     color: #ffffff;
-
     font-size: 1.5rem;
-
     font-weight: 700;
-
     margin-top: 5px;
-
 }
 
 
 .modal-eyebrow {
-
     color: #ff5722;
-
     font-size: 0.75rem;
-
     font-weight: 800;
-
     letter-spacing: 1.5px;
-
 }
 
 
 .vendor-subtitle {
-
     color: #999999;
-
     font-size: 0.85rem;
-
     margin: 5px 0 0;
-
 }
 
 
-/* BODY */
+/* Body */
 
 .vendor-modal .modal-body {
-
-    background: #111111;
-
-    padding: 24px;
-
+    background: #121212;
+    padding: 1.7rem;
 }
 
 
-/* FIELD */
+/* Fields */
 
 .vendor-field {
-
-    margin-bottom: 17px;
-
+    margin-bottom: 1.1rem;
 }
 
 
 .vendor-field label {
-
     display: block;
-
     color: #ffffff;
-
-    font-size: 14px;
-
+    font-size: 0.9rem;
     font-weight: 600;
-
     margin-bottom: 7px;
-
 }
 
 
 .vendor-field label i {
-
     color: #ff5722;
-
     margin-right: 6px;
-
 }
 
 
-/* INPUT / SELECT / TEXTAREA */
+/* Input */
 
 .vendor-field input,
 .vendor-field select,
@@ -141,15 +82,15 @@
 
     width: 100%;
 
-    background: #1d1d1d;
+    background: #1e1e1e;
 
     color: #ffffff;
 
-    border: 1px solid #353535;
+    border: 1px solid #333333;
 
     border-radius: 9px;
 
-    padding: 12px 14px;
+    padding: 0.8rem 0.95rem;
 
     outline: none;
 
@@ -162,9 +103,7 @@
 
 .vendor-field input::placeholder,
 .vendor-field textarea::placeholder {
-
     color: #777777;
-
 }
 
 
@@ -174,59 +113,45 @@
 
     border-color: #ff5722;
 
-    background: #191919;
+    box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.12);
 
-    box-shadow:
-        0 0 0 3px rgba(255, 87, 34, 0.12);
+    background: #1b1b1b;
 
 }
 
 
-/* SELECT */
+/* Select */
 
 .vendor-field select {
-
     cursor: pointer;
-
 }
 
 
 .vendor-field select option {
-
-    background: #1d1d1d;
-
+    background: #1e1e1e;
     color: #ffffff;
-
 }
 
 
-/* TEXTAREA */
+/* Textarea */
 
 .vendor-field textarea {
-
     resize: vertical;
-
     min-height: 100px;
-
 }
 
 
-/* ERROR */
+/* Error */
 
 .vendor-error {
-
     color: #ff7043;
-
-    font-size: 13px;
-
+    font-size: 0.85rem;
+    margin-bottom: 10px;
     min-height: 20px;
-
-    margin-bottom: 8px;
-
 }
 
 
-/* BUTTON */
+/* Submit Button */
 
 .vendor-submit-btn {
 
@@ -238,11 +163,11 @@
 
     border: none;
 
-    padding: 13px;
+    padding: 0.85rem;
 
     border-radius: 9px;
 
-    font-size: 16px;
+    font-size: 1rem;
 
     font-weight: 700;
 
@@ -265,29 +190,36 @@
 
     background: #e64a19;
 
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 
-    box-shadow:
-        0 8px 20px rgba(255, 87, 34, 0.25);
+    box-shadow: 0 7px 20px rgba(255, 87, 34, 0.3);
 
 }
 
 
-/* MOBILE */
+/* Close button */
+
+.vendor-modal .btn-close {
+    opacity: 1;
+}
+
+
+.vendor-modal .btn-close:hover {
+    transform: scale(1.1);
+}
+
+
+/* Mobile */
 
 @media (max-width: 576px) {
 
     .vendor-modal-header,
     .vendor-modal .modal-body {
-
-        padding: 18px !important;
-
+        padding: 1.2rem !important;
     }
 
     .vendor-modal-header .modal-title {
-
         font-size: 1.25rem;
-
     }
 
 }
