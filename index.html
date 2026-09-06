@@ -1,187 +1,1113 @@
-<!-- ================= VENDOR MODAL ================= -->
-<div
-    class="modal fade"
-    id="vendorModal"
-    tabindex="-1"
-    aria-hidden="true"
->
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <div class="modal-content vendor-modal">
+  <title>Food Men - Food Delivery</title>
 
-            <!-- HEADER -->
-            <div class="modal-header vendor-modal-header">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
 
-                <div>
-                    <span class="modal-eyebrow">
-                        PARTNER WITH US
-                    </span>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  >
 
-                    <h5 class="modal-title">
-                        Add New Vendor
-                    </h5>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-                    <p class="vendor-subtitle">
-                        Tell us about your food business
-                    </p>
-                </div>
+<body>
 
-                <button
-                    type="button"
-                    class="btn-close btn-close-white"
-                    data-bs-dismiss="modal"
-                ></button>
+<div class="app-shell">
 
-            </div>
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar">
 
+    <div class="brand">
+      <i class="bi bi-fire brand-mark"></i>
+      <span>Food Men</span>
+    </div>
 
-            <!-- BODY -->
-            <div class="modal-body">
+    <nav class="side-nav">
 
-                <form id="vendorForm">
+      <a href="#home" class="nav-link active">
+        <i class="bi bi-house-door"></i>
+        Home
+      </a>
 
-                    <!-- Vendor Name -->
-                    <div class="vendor-field">
+      <a href="#menu" class="nav-link">
+        <i class="bi bi-grid"></i>
+        Menu
+      </a>
 
-                        <label>
-                            <i class="bi bi-shop"></i>
-                            Vendor Name
-                        </label>
+      <a href="#vendors" class="nav-link">
+        <i class="bi bi-shop"></i>
+        Vendors
+      </a>
 
-                        <input
-                            type="text"
-                            id="vendorName"
-                            placeholder="e.g. Karachi Biryani"
-                            required
-                        >
+      <a href="#orders" class="nav-link">
+        <i class="bi bi-bag"></i>
+        Orders
+      </a>
 
-                    </div>
+      <a href="#profile" class="nav-link">
+        <i class="bi bi-person"></i>
+        Profile
+      </a>
 
+    </nav>
 
-                    <!-- Food Type -->
-                    <div class="vendor-field">
+    <div class="sidebar-bottom">
 
-                        <label>
-                            <i class="bi bi-grid"></i>
-                            Food Type
-                        </label>
+      <button
+        type="button"
+        class="vendor-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#vendorModal"
+      >
+        <i class="bi bi-plus-circle"></i>
+        Add Vendor
+      </button>
 
-                        <select
-                            id="vendorType"
-                            required
-                        >
+      <button
+        type="button"
+        class="login-side-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#loginModal"
+      >
+        <i class="bi bi-box-arrow-in-right"></i>
+        Login
+      </button>
 
-                            <option value="">
-                                Select food type
-                            </option>
+    </div>
 
-                            <option value="Burgers & Fast Food">
-                                Burgers & Fast Food
-                            </option>
-
-                            <option value="Pizza">
-                                Pizza
-                            </option>
-
-                            <option value="Chicken">
-                                Chicken
-                            </option>
-
-                            <option value="Desi Food">
-                                Desi Food
-                            </option>
-
-                            <option value="Desserts">
-                                Desserts
-                            </option>
-
-                            <option value="Drinks">
-                                Drinks
-                            </option>
-
-                        </select>
-
-                    </div>
+  </aside>
 
 
-                    <!-- Phone -->
-                    <div class="vendor-field">
+  <!-- ================= MAIN ================= -->
+  <main class="main-content">
 
-                        <label>
-                            <i class="bi bi-telephone"></i>
-                            Phone Number
-                        </label>
+    <!-- TOPBAR -->
+    <header class="topbar">
 
-                        <input
-                            type="tel"
-                            id="vendorPhone"
-                            placeholder="03001234567"
-                            required
-                        >
+      <div class="top-search">
+        <i class="bi bi-search"></i>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search for food, restaurants..."
+        >
+      </div>
 
-                    </div>
+      <div class="top-actions">
 
+        <button
+          type="button"
+          class="icon-btn"
+          id="cartButton"
+        >
+          <i class="bi bi-cart3"></i>
+          <span class="cart-count">0</span>
+        </button>
 
-                    <!-- Address -->
-                    <div class="vendor-field">
+        <button
+          type="button"
+          class="profile-mini"
+          data-bs-toggle="modal"
+          data-bs-target="#loginModal"
+        >
+          <div class="avatar">
+            <span>U</span>
+          </div>
 
-                        <label>
-                            <i class="bi bi-geo-alt"></i>
-                            Address
-                        </label>
+          <span>Account</span>
+        </button>
 
-                        <input
-                            type="text"
-                            id="vendorAddress"
-                            placeholder="e.g. Main Tariq Road, Karachi"
-                            required
-                        >
+      </div>
 
-                    </div>
-
-
-                    <!-- Vendor Bio -->
-                    <div class="vendor-field">
-
-                        <label>
-                            <i class="bi bi-person-lines-fill"></i>
-                            Vendor Bio
-                        </label>
-
-                        <textarea
-                            id="vendorBio"
-                            rows="4"
-                            placeholder="Tell customers about your restaurant, special dishes and experience..."
-                            required
-                        ></textarea>
-
-                    </div>
+    </header>
 
 
-                    <!-- Error -->
-                    <div
-                        id="vendor-error"
-                        class="vendor-error"
-                    ></div>
+    <!-- ================= HERO ================= -->
+    <section class="hero-section" id="home">
 
+      <div class="hero-content">
 
-                    <!-- Button -->
-                    <button
-                        type="submit"
-                        class="vendor-submit-btn"
-                    >
+        <span class="hero-badge">
+          <i class="bi bi-stars"></i>
+          Deliciousness delivered
+        </span>
 
-                        <i class="bi bi-plus-circle"></i>
+        <h1>
+          Good food.<br>
+          <span>Good mood.</span>
+        </h1>
 
-                        Add Vendor
+        <p>
+          Discover your favorite meals, restaurants and local food vendors
+          in one place.
+        </p>
 
-                    </button>
+        <div class="hero-actions">
 
-                </form>
+          <a href="#menu" class="primary-btn">
+            Explore Menu
+            <i class="bi bi-arrow-right"></i>
+          </a>
 
-            </div>
+          <a href="#vendors" class="secondary-btn">
+            View Vendors
+          </a>
 
         </div>
 
-    </div>
+      </div>
+
+
+      <div class="hero-food">
+
+        <div class="hero-circle"></div>
+
+        <div class="hero-img-box">
+          <img
+            src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
+            class="hero-img"
+            alt="Delicious Food"
+          >
+        </div>
+
+        <div class="floating-card card-one">
+          <i class="bi bi-star-fill"></i>
+          4.9 Rating
+        </div>
+
+        <div class="floating-card card-two">
+          <i class="bi bi-lightning-charge-fill"></i>
+          Fast Delivery
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+    <section class="section-block">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">EXPLORE</span>
+          <h2>Food Categories</h2>
+        </div>
+
+      </div>
+
+      <div class="category-grid">
+
+        <button class="category-card active" data-category="All">
+          <i class="bi bi-grid-fill"></i>
+          All
+        </button>
+
+        <button class="category-card" data-category="Burgers">
+          <i class="bi bi-badge-hd"></i>
+          Burgers
+        </button>
+
+        <button class="category-card" data-category="Pizza">
+          <i class="bi bi-pie-chart-fill"></i>
+          Pizza
+        </button>
+
+        <button class="category-card" data-category="Chicken">
+          <i class="bi bi-egg-fried"></i>
+          Chicken
+        </button>
+
+        <button class="category-card" data-category="Desserts">
+          <i class="bi bi-cake2-fill"></i>
+          Desserts
+        </button>
+
+        <button class="category-card" data-category="Drinks">
+          <i class="bi bi-cup-straw"></i>
+          Drinks
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= MENU ================= -->
+    <section class="section-block" id="menu">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">OUR MENU</span>
+          <h2>Popular Food</h2>
+        </div>
+
+        <div class="filter-buttons">
+
+          <button class="filter-btn active" data-category="All">
+            All
+          </button>
+
+          <button class="filter-btn" data-category="Burgers">
+            Burgers
+          </button>
+
+          <button class="filter-btn" data-category="Pizza">
+            Pizza
+          </button>
+
+          <button class="filter-btn" data-category="Chicken">
+            Chicken
+          </button>
+
+          <button class="filter-btn" data-category="Desserts">
+            Desserts
+          </button>
+
+          <button class="filter-btn" data-category="Drinks">
+            Drinks
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="food-grid" id="foodGrid">
+
+        <!-- FOOD 1 -->
+        <div
+          class="food-card"
+          data-name="Crispy Fried Chicken"
+          data-category="Chicken"
+        >
+
+          <div class="food-img-wrap">
+
+            <img
+              src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=700&q=85"
+              class="food-img"
+              alt="Crispy Fried Chicken"
+            >
+
+          </div>
+
+          <div class="food-info">
+
+            <h5>Crispy Fried Chicken</h5>
+
+            <span class="food-category">
+              Chicken
+            </span>
+
+            <div class="food-bottom">
+
+              <strong>Rs. 850</strong>
+
+              <button
+                type="button"
+                class="primary-btn add-btn"
+                data-name="Crispy Fried Chicken"
+                data-price="850"
+                data-img="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=700&q=85"
+              >
+                <i class="bi bi-plus"></i>
+                Add
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FOOD 2 -->
+        <div
+          class="food-card"
+          data-name="Chocolate Lava Cake"
+          data-category="Desserts"
+        >
+
+          <div class="food-img-wrap">
+
+            <img
+              src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=85"
+              class="food-img"
+              alt="Chocolate Lava Cake"
+            >
+
+          </div>
+
+          <div class="food-info">
+
+            <h5>Chocolate Lava Cake</h5>
+
+            <span class="food-category">
+              Desserts
+            </span>
+
+            <div class="food-bottom">
+
+              <strong>Rs. 450</strong>
+
+              <button
+                type="button"
+                class="primary-btn add-btn"
+                data-name="Chocolate Lava Cake"
+                data-price="450"
+                data-img="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=85"
+              >
+                <i class="bi bi-plus"></i>
+                Add
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FOOD 3 -->
+        <div
+          class="food-card"
+          data-name="Beef Smash Burger"
+          data-category="Burgers"
+        >
+
+          <div class="food-img-wrap">
+
+            <img
+              src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=85"
+              class="food-img"
+              alt="Beef Smash Burger"
+            >
+
+          </div>
+
+          <div class="food-info">
+
+            <h5>Beef Smash Burger</h5>
+
+            <span class="food-category">
+              Burgers
+            </span>
+
+            <div class="food-bottom">
+
+              <strong>Rs. 650</strong>
+
+              <button
+                type="button"
+                class="primary-btn add-btn"
+                data-name="Beef Smash Burger"
+                data-price="650"
+                data-img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=85"
+              >
+                <i class="bi bi-plus"></i>
+                Add
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FOOD 4 -->
+        <div
+          class="food-card"
+          data-name="Cheese Pizza"
+          data-category="Pizza"
+        >
+
+          <div class="food-img-wrap">
+
+            <img
+              src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=700&q=85"
+              class="food-img"
+              alt="Cheese Pizza"
+            >
+
+          </div>
+
+          <div class="food-info">
+
+            <h5>Cheese Pizza</h5>
+
+            <span class="food-category">
+              Pizza
+            </span>
+
+            <div class="food-bottom">
+
+              <strong>Rs. 950</strong>
+
+              <button
+                type="button"
+                class="primary-btn add-btn"
+                data-name="Cheese Pizza"
+                data-price="950"
+                data-img="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=700&q=85"
+              >
+                <i class="bi bi-plus"></i>
+                Add
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FOOD 5 -->
+        <div
+          class="food-card"
+          data-name="Grilled Chicken"
+          data-category="Chicken"
+        >
+
+          <div class="food-img-wrap">
+
+            <img
+              src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=700&q=85"
+              class="food-img"
+              alt="Grilled Chicken"
+            >
+
+          </div>
+
+          <div class="food-info">
+
+            <h5>Grilled Chicken</h5>
+
+            <span class="food-category">
+              Chicken
+            </span>
+
+            <div class="food-bottom">
+
+              <strong>Rs. 780</strong>
+
+              <button
+                type="button"
+                class="primary-btn add-btn"
+                data-name="Grilled Chicken"
+                data-price="780"
+                data-img="https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=700&q=85"
+              >
+                <i class="bi bi-plus"></i>
+                Add
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- FOOD 6 -->
+        <div
+          class="food-card"
+          data-name="Cold Coffee"
+          data-category="Drinks"
+        >
+
+          <div class="food-img-wrap">
+
+            <img
+              src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=700&q=85"
+              class="food-img"
+              alt="Cold Coffee"
+            >
+
+          </div>
+
+          <div class="food-info">
+
+            <h5>Cold Coffee</h5>
+
+            <span class="food-category">
+              Drinks
+            </span>
+
+            <div class="food-bottom">
+
+              <strong>Rs. 350</strong>
+
+              <button
+                type="button"
+                class="primary-btn add-btn"
+                data-name="Cold Coffee"
+                data-price="350"
+                data-img="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=700&q=85"
+              >
+                <i class="bi bi-plus"></i>
+                Add
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="noFood" class="no-food">
+        No food found.
+      </div>
+
+    </section>
+
+
+    <!-- ================= VENDORS ================= -->
+    <section class="section-block" id="vendors">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">DISCOVER</span>
+          <h2>Our Vendors</h2>
+        </div>
+
+        <button
+          class="primary-btn"
+          data-bs-toggle="modal"
+          data-bs-target="#vendorModal"
+        >
+          <i class="bi bi-plus"></i>
+          Add Vendor
+        </button>
+
+      </div>
+
+      <div class="vendor-grid" id="vendorGrid">
+
+        <div class="vendor-card">
+
+          <div class="vendor-image">
+            <img
+              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=700&q=85"
+              alt="Urban Bites"
+            >
+          </div>
+
+          <div class="vendor-content">
+
+            <span class="vendor-tag">
+              Restaurant
+            </span>
+
+            <h4>Urban Bites</h4>
+
+            <p>
+              Burgers, Pizza & Fast Food
+            </p>
+
+            <button
+              type="button"
+              class="outline-btn vendor-view-btn"
+            >
+              View Menu
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="vendor-card">
+
+          <div class="vendor-image">
+            <img
+              src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=700&q=85"
+              alt="Food House"
+            >
+          </div>
+
+          <div class="vendor-content">
+
+            <span class="vendor-tag">
+              Restaurant
+            </span>
+
+            <h4>Food House</h4>
+
+            <p>
+              Chicken, Rice & Drinks
+            </p>
+
+            <button
+              type="button"
+              class="outline-btn vendor-view-btn"
+            >
+              View Menu
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= ORDERS ================= -->
+    <section class="section-block" id="orders">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">MY ORDERS</span>
+          <h2>Orders</h2>
+        </div>
+
+      </div>
+
+      <div class="empty-section">
+
+        <i class="bi bi-bag"></i>
+
+        <h4>No orders yet</h4>
+
+        <p>
+          Add something delicious to your cart and place your first order.
+        </p>
+
+        <a href="#menu" class="primary-btn">
+          Explore Food
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= PROFILE ================= -->
+    <section class="section-block" id="profile">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">ACCOUNT</span>
+          <h2>Profile</h2>
+        </div>
+
+      </div>
+
+      <div class="profile-card">
+
+        <div class="profile-avatar">
+          U
+        </div>
+
+        <div>
+          <h4>Your Account</h4>
+          <p>
+            Login to manage your profile and orders.
+          </p>
+
+          <button
+            type="button"
+            class="primary-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#loginModal"
+          >
+            Login
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+
+      <div class="footer-brand">
+
+        <i class="bi bi-fire"></i>
+
+        <span>
+          Food Men © 2026
+        </span>
+
+      </div>
+
+      <div>
+        All rights reserved.
+      </div>
+
+    </footer>
+
+  </main>
+
 </div>
+
+
+<!-- ================= CART OVERLAY ================= -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+
+<!-- ================= CART ================= -->
+<div class="cart-drawer" id="cartDrawer">
+
+  <div class="drawer-header">
+
+    <h5>
+      <i class="bi bi-cart3"></i>
+      Your Cart
+    </h5>
+
+    <button
+      type="button"
+      class="close-btn"
+      id="closeCart"
+    >
+      &times;
+    </button>
+
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-footer">
+
+    <div class="cart-total">
+      <span>Total</span>
+      <strong id="cartTotal">Rs. 0</strong>
+    </div>
+
+    <button
+      type="button"
+      class="primary-btn checkout-btn"
+      id="checkoutBtn"
+    >
+      Checkout
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+<div
+  class="modal fade"
+  id="loginModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content custom-modal">
+
+      <div class="modal-header">
+
+        <div>
+          <span class="modal-eyebrow">
+            WELCOME BACK
+          </span>
+
+          <h5 class="modal-title">
+            Login to Food Men
+          </h5>
+        </div>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <form id="loginForm">
+
+          <div class="mb-3">
+
+            <label class="form-label">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="name@gmail.com"
+              required
+            >
+
+          </div>
+
+
+          <div class="mb-3">
+
+            <label class="form-label">
+              Password
+            </label>
+
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              placeholder="Minimum 8 characters"
+              required
+            >
+
+          </div>
+
+
+          <div
+            id="login-error"
+            class="form-error"
+          ></div>
+
+
+          <button
+            type="submit"
+            class="primary-btn w-100"
+          >
+            <i class="bi bi-box-arrow-in-right"></i>
+            Login
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= VENDOR MODAL ================= -->
+<div
+  class="modal fade"
+  id="vendorModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+
+    <div class="modal-content vendor-modal">
+
+      <div class="modal-header vendor-modal-header">
+
+        <div>
+          <span class="modal-eyebrow">
+            PARTNER WITH US
+          </span>
+
+          <h5 class="modal-title">
+            Add New Vendor
+          </h5>
+
+          <p class="vendor-subtitle">
+            Tell us about your food business
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <form id="vendorForm">
+
+          <div class="vendor-field">
+            <label>
+              <i class="bi bi-shop"></i>
+              Vendor Name
+            </label>
+
+            <input
+              type="text"
+              id="vendorName"
+              placeholder="e.g. Karachi Biryani"
+              required
+            >
+          </div>
+
+          <div class="vendor-field">
+            <label>
+              <i class="bi bi-grid"></i>
+              Food Type
+            </label>
+
+            <select id="vendorType" required>
+              <option value="">Select food type</option>
+              <option value="Burgers">Burgers</option>
+              <option value="Pizza">Pizza</option>
+              <option value="Chicken">Chicken</option>
+              <option value="Desi Food">Desi Food</option>
+              <option value="Desserts">Desserts</option>
+              <option value="Drinks">Drinks</option>
+            </select>
+          </div>
+
+          <div class="vendor-field">
+            <label>
+              <i class="bi bi-telephone"></i>
+              Phone Number
+            </label>
+
+            <input
+              type="tel"
+              id="vendorPhone"
+              placeholder="03001234567"
+              required
+            >
+          </div>
+
+          <div class="vendor-field">
+            <label>
+              <i class="bi bi-geo-alt"></i>
+              Address
+            </label>
+
+            <input
+              type="text"
+              id="vendorAddress"
+              placeholder="e.g. Tariq Road, Karachi"
+              required
+            >
+          </div>
+
+          <div class="vendor-field">
+            <label>
+              <i class="bi bi-person-lines-fill"></i>
+              Vendor Bio
+            </label>
+
+            <textarea
+              id="vendorBio"
+              rows="4"
+              placeholder="Tell customers about your restaurant and special food..."
+              required
+            ></textarea>
+          </div>
+
+          <div
+            id="vendor-error"
+            class="vendor-error"
+          ></div>
+
+          <button
+            type="submit"
+            class="vendor-submit-btn"
+          >
+            <i class="bi bi-plus-circle"></i>
+            Add Vendor
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= VENDOR INFO MODAL ================= -->
+<div
+  class="modal fade"
+  id="vendorInfoModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content custom-modal">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title" id="vendorInfoTitle">
+          Vendor
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="vendor-info-box">
+
+          <i class="bi bi-shop-window"></i>
+
+          <h4 id="vendorInfoName">
+            Vendor
+          </h4>
+
+          <p id="vendorInfoType">
+            Food
+          </p>
+
+          <button
+            type="button"
+            class="primary-btn"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- BOOTSTRAP -->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+></script>
+
+<!-- YOUR JS -->
+<script src="script.js"></script>
+
+</body>
+</html>
